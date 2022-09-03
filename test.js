@@ -1,18 +1,28 @@
-class Deck {
-    constructor() {
-        const suits = ['Diamond', 'Heart', 'Spade', 'Club'];
-        const faces = ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King'];
-        const deck = [];
-        suits.forEach(suit => {
-            faces.forEach(face => {
-                deck.push(this.createCard(suit, face));
-            });
-            });
-            this.deck = deck;
-        }
-        createCard(suit, face) {
-            return face + " of " + suit;
-        }
-    }
+const groceryList = Object.freeze([
+    { "item": "carrots",           "haveIngredient": false },
+    { "item": "onions",            "haveIngredient": true  },
+    { "item": "celery",            "haveIngredient": false },
+    { "item": "cremini mushrooms", "haveIngredient": false },
+    { "item": "butter",            "haveIngredient": true  }
+]);
 
-createCard();
+const needThyme = [ ...groceryList, { "item": "thyme", "haveIngredient": false } ];
+
+console.log(needThyme);
+
+const gotTheThyme = [ ...needThyme.slice(0, 5), { ...needThyme[5], "haveIngredient": true } ];
+
+console.log(gotTheThyme);
+
+const notNeceCelery = [ ...gotTheThyme.slice(0, 2), ...gotTheThyme.slice(3) ];
+
+console.log(notNeceCelery);
+
+const items = Object.freeze(["carrots", "onions", "celery", "mushrooms", "butter", "thyme"]);
+
+const sortedItems = [...items].sort();
+
+const groceries = ["pearl onions", "cremini mushrooms", "thyme"];
+const groceryLists = groceries.map( item => `<li>${item}</li>` );
+
+console.log(groceryLists);

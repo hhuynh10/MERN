@@ -51,3 +51,9 @@ console.log(six);
 // an array containing just the first type of all the pokémon whose second type is "flying"
 const seven = pokemon.filter( item => item.types[1] === "flying" ).map(item => item.name );
 console.log(seven);
+
+// a count of the number of pokémon that are "normal" type
+const eight = pokemon.filter( item => item.types.includes("normal") ).reduce((acc, item)=> (
+    acc + item
+))
+console.log(eight);

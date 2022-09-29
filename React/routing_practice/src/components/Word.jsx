@@ -3,11 +3,16 @@ import { useParams } from "react-router";
 
 const Word = (props) => {
 
-    const { word } = useParams()
+    const { word, color, backgroundCol } = useParams()
 
     return (
         <div>
-            <h1 style={{textAlign : "center" }}>The word is: { word }</h1>
+            { isNaN(word) &&
+            <h1 style={{textAlign : "center",
+                        color : color,
+                        backgroundColor: backgroundCol
+            }}>The word is: { word }</h1>
+            }
         </div>
     )
 }

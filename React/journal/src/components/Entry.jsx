@@ -4,9 +4,9 @@ const Entry = (props) => {
     const {entries, setEntries} = props
 
     const deleteEntry = (index) => {
-        const newEntries = entries.filter((entry, i) => (
-            i !== index
-        ))
+        const newEntries = entries.filter((entry, i) => {
+        return i !== index
+    })
         setEntries(newEntries)
     }
     
@@ -14,7 +14,7 @@ const Entry = (props) => {
         <div>
             {
                 entries.map((entry, index)=> (
-                    <p key={index}>{entry} <button onClick={()=> deleteEntry}>Delete</button></p>
+                    <p key={index}>{entry} <button onClick={(e)=> deleteEntry}>Delete</button></p>
                 ))
             }
         </div>

@@ -13,6 +13,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path= "/:number" element={<Number />} />
         <Route path= "/:word" element={<Word />} />
+        <Route path= "/:word/:color/:backgroundCol" element={<Word />} />
       </Routes>
     </BrowserRouter>
   );

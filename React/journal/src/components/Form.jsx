@@ -1,6 +1,7 @@
 import React , {useState} from 'react'
 
-const Form = ({setEntries, entries}) => {
+const Form = (props) => {
+    const {entries, setEntries} = props
     const [thought, setThought] = useState('')
 
     const handleSubmit = e => {

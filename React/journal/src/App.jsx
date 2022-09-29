@@ -11,12 +11,13 @@ function App() {
     <div className="App">
       <Header />
       <Form
-      setEntries={setEntries}
       entries={entries}
+      setEntries={setEntries}
       />
-      {entries.map((entry, index)=>{
-        return <Entry key={index} entry={entry}/>
-    })}
+      <Entry
+      entries={entries}
+      setEntries={setEntries}
+      />
     </div>
   );
 }

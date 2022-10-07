@@ -5,6 +5,7 @@ import ProductForm from './components/ProductForm';
 import Header from './components/Header';
 import ProductList from './components/ProductList';
 import ViewProduct from './components/ViewProduct';
+import EditForm from './components/EditForm';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<ProductList />} />
           <Route path="/addProduct" element={<ProductForm />} />
           <Route path="/viewproduct/:id" element={<ViewProduct />} />
+          <Route path="/editproduct/:id" element={<EditForm />} />
         </Routes>
       </BrowserRouter>
     </div>

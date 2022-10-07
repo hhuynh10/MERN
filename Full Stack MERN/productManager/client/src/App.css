@@ -19,6 +19,14 @@
   background-color: #d5eef0;
 }
 
+.edit{
+  text-decoration: none;
+  color: green
+}
+
+.edit:hover{
+  color:white
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

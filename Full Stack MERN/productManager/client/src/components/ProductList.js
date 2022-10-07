@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const ProductList = () => {
 
@@ -16,13 +17,13 @@ const ProductList = () => {
     }, [])
 
     return (
-        <div>
-            <h2>Product List:</h2>
+        <div className="col-4 mx-auto list">
+            <h2 className="text-dark mt-2">Product List:</h2>
             {
                 product.map((product)=>(
                     <div>
-                        <p>{product.title}</p>
-                        <p>{product.price}</p>
+                        <h5><Link to={`/viewproduct/${product._id}`} className="title">{product.title}</Link></h5>
+                        <hr/>
                     </div>
                 ))
             }

@@ -2,6 +2,23 @@
   text-align: center;
 }
 
+.active {
+  color: red
+}
+
+.title {
+  color: #323632;
+  text-decoration: none;
+}
+
+.title:hover {
+  color: #61dafb;
+}
+
+.list {
+  background-color: #d5eef0;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -36,3 +53,4 @@
     transform: rotate(360deg);
   }
 }
+

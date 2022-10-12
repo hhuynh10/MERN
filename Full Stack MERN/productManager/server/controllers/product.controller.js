@@ -6,7 +6,7 @@ module.exports = {
         .then((result)=> {
             res.json(result)
         }).catch((err)=> {
-            console.log(err)
+            res.status(400).json(err)
         })
     },
 
@@ -15,7 +15,7 @@ module.exports = {
         .then((result)=> {
             res.json(result)
         }).catch((err)=> {
-            console.log(err)
+            res.status(400).json(err)
         })
     },
 
@@ -24,16 +24,16 @@ module.exports = {
         .then((result)=> {
             res.json(result)
         }).catch((err)=> {
-            console.log(err)
+            res.status(400).json(err)
         })
     },
 
     updateProduct:(req, res)=>{
-        Product.updateOne({_id:req.params.id}, req.body)
+        Product.updateOne({_id:req.params.id}, req.body, {runValidators:true, new:true})
         .then((result)=> {
             res.json(result)
         }).catch((err)=> {
-            console.log(err)
+            res.status(400).json(err)
         })
     }, 
 
@@ -42,7 +42,7 @@ module.exports = {
         .then((result)=> {
             res.json(result)
         }).catch((err)=> {
-            console.log(err)
+            res.status(400).json(err)
         })
     }
 }

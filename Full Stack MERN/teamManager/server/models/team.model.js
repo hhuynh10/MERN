@@ -6,12 +6,12 @@ const TeamSchema = new mongoose.Schema({
         type: String,
         required: [true, "Name is required."],
         unique: true,
-        minLength: [3, "Name must be at least 2 character long."]
+        minLength: [2, "Name must be at least 2 character long."]
     },
     position: {
         type: String,
         required: [true, "Position is required."],
-        minLength: [3, "Position must be at least 2 character long."]
+        minLength: [2, "Position must be at least 2 character long."]
     }
 }, {timestamp:true});
 

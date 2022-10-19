@@ -40,7 +40,7 @@ const ViewPet = () => {
         <div className="mt-3 mx-auto col-6">
             <Link to="/" className="text-success">back to home</Link>
             <h4 className='mt-2'>Details about: {pet.name} <button onClick={(e)=>deleteHandler(pet._id)} className='ms-5 btn btn-danger'>Adopt {pet.name}</button></h4>
-            <table className='table border border-4 border-success mt-2 '>
+            <table className='table border border-3 border-success mt-2 '>
                 <div className='p-3'>
                     <p className='fs-5'><span className='fs-4'>Pet type: </span>{pet.type}</p>
                     <p className='fs-5'><span className='fs-4'>Description: </span>{pet.description}</p>

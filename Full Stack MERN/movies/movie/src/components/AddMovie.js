@@ -21,10 +21,11 @@ const AddMovie = ({movie, setMovie}) => {
             rating,
             description,
             boxArt : image
-        }).then((res)=> {
+        }, {withCredentials:true})
+        .then((res)=> {
             console.log(res)
             setMovie(prevState=>[...prevState, res.data])
-            navigate('/')
+            navigate('/home')
         }).catch((err)=> {
             console.log(err)
             setErrors(err.response.data.errors)

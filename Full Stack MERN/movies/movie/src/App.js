@@ -5,6 +5,8 @@ import Header from './components/Header';
 import Home from './components/Home';
 import ViewMovie from './components/ViewMovie';
 import Edit from './components/Edit';
+import Register from './components/Register';
+import Login from './components/Login';
 
 
 function App() {
@@ -14,7 +16,9 @@ function App() {
       <BrowserRouter>
       <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/viewmovie/:id" element={<ViewMovie />} />
           <Route path="/editmovie/:id" element={<Edit />} />
         </Routes>

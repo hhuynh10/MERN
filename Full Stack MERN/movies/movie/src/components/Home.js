@@ -9,7 +9,7 @@ const Home = () => {
     const [movie, setMovie] = useState([])
 
     useEffect(()=>{
-        axios.get('http://localhost:8000/api/allMovies')
+        axios.get('http://localhost:8000/api/allMovies', {withCredentials:true})
         .then((res)=> {
             console.log(res)
             setMovie(res.data)

@@ -10,17 +10,17 @@ const ViewMovie = () => {
     const navigate = useNavigate()
 
     const deleteHandler = (id) =>{
-        axios.delete(`http://localhost:8000/api/delete/${id}`)
+        axios.delete(`http://localhost:8000/api/delete/${id}`, {withCredentials:true})
         .then((res)=> {
             console.log(res)
-            navigate('/')
+            navigate('/home')
         }).catch((err)=> {
             console.log(err)
         })
     }
 
     useEffect(()=>{
-        axios.get(`http://localhost:8000/api/movie/${id}`)
+        axios.get(`http://localhost:8000/api/movie/${id}`, {withCredentials:true})
         .then((res)=> {
             console.log(res)
             setMovie(res.data)

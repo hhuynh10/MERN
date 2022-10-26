@@ -15,7 +15,7 @@ const Edit = () => {
     const navigate = useNavigate()
 
     useEffect(()=>{
-        axios.get(`http://localhost:8000/api/movie/${id}`)
+        axios.get(`http://localhost:8000/api/movie/${id}`, {withCredentials:true})
         .then((res)=> {
             console.log(res)
             setTitle(res.data.title)
@@ -36,9 +36,9 @@ const Edit = () => {
             rating,
             description,
             boxArt : image
-        }).then((res)=> {
+        }, {withCredentials:true}).then((res)=> {
             console.log(res)
-            navigate('/')
+            navigate('/home')
         }).catch((err)=> {
             console.log(err)
             setErrors(err.response.data.errors)

@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const MovieSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: [true, "Title is required!"],
+        required: [true, "Title is required"],
         minLength: [3, "Title must be at least 3 character long"]
     },
     year: {
         type: Number,
-        required: [true, "Year is required!"],
+        required: [true, "Year is required"],
         min: [2000, "Must be after 2000s"]
     },
     rating: {
@@ -21,7 +21,7 @@ const MovieSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: [true, "Description is required!"],
+        required: [true, "Description is required"],
         minLength: [3, "Description must be at least 3 character long"]
     },
     boxArt: {
@@ -29,7 +29,7 @@ const MovieSchema = new mongoose.Schema({
         required: [true, "Image is required!"],
     }
 
-}, {timestamp:true});
+}, {timestamps:true});
 
 const Movie = mongoose.model('Movie', MovieSchema);
 

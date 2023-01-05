@@ -17,4 +17,3 @@ const oFoods = groceries1.filter( item => item.includes("o") );
 // together
 const values2 = [1, 2, 3, 4, 5];
 const oddCubes = values2.filter( val => val % 2 !==0 ).map( val => val**3 );
-

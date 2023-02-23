@@ -53,7 +53,5 @@ const seven = pokemon.filter( item => item.types[1] === "flying" ).map(item => i
 console.log(seven);
 
 // a count of the number of pokémon that are "normal" type
-const eight = pokemon.filter( item => item.types.includes("normal") ).reduce((acc, item)=> (
-    acc + item
-))
+const eight = pokemon.filter( item => item.types.includes("normal") ).reduce((acc, item)=> (acc + item))
 console.log(eight);

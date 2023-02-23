@@ -8,7 +8,7 @@ const Form = ({entries, setEntries}) => {
 
     const createUser = (e) => {
         e.preventDefault();
-        const newUser = { username};
+        const newUser = {username, email};
         console.log("Welcome", newUser);
         setUsername("");
         setEmail("");

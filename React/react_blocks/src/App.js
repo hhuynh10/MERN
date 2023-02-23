@@ -5,25 +5,24 @@ import Navigation from './components/Navigation';
 import Main from './components/Main';
 import SubContents from './components/SubContents ';
 import Advertisement from './components/Advertisement';
+import Body from './components/Body';
+import TopSub from './components/TopSub';
 
 function App() {
   return (
-    <div className="App" style={{
-      height: 'auto',
-      width: '960px',
-      margin: 'auto',
-      marginTop: '50px',
-      backgroundColor: 'grey',
-      padding: '10px'
-    }}>
+    <div className='App'>
       <Header />
-      <Navigation />
-      <Main>
-        <SubContents />
-        <SubContents />
-        <SubContents />
-        <Advertisement />
-      </Main>
+      <Body>
+        <Navigation />
+        <Main>
+          <TopSub>
+            <SubContents />
+            <SubContents />
+            <SubContents />
+          </TopSub>
+          <Advertisement />
+        </Main>
+      </Body>
     </div>
   );
 }

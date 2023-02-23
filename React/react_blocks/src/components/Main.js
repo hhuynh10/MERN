@@ -1,13 +1,8 @@
 import React from 'react'
 
-const Main = () => {
+const Main = ({children}) => {
   return (
-    <div style={{
-        width: '100%',
-        height: 'auto',
-        backgroundColor: 'red',
-        padding: '10px'
-    }}></div>
+    <div className='right'>{children}</div>
   )
 }
 

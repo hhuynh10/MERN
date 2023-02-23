@@ -2,7 +2,7 @@ import React from 'react'
 
 const SubContents  = () => {
   return (
-    <div>SubContents </div>
+    <div className='square'></div>
   )
 }
 

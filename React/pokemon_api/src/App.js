@@ -12,7 +12,7 @@ function App() {
       return result.json()
     }).then((res)=>{
       console.log(res)
-      setState(res.results)
+      setState(res.results)  
     }).catch((error)=>{
       console.log(error)
     })

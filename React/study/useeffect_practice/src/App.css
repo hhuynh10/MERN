@@ -29,10 +29,13 @@
 }
 
 .bg{
-  background-image: url('https://c4.wallpaperflare.com/wallpaper/1005/822/563/star-wars-death-star-at-at-space-wallpaper-preview.jpg');
-  background-size: 700px 600px;
+  background-image: linear-gradient(rgba(151, 151, 239, 0.75), rgba(0, 0, 0, 0.75)),
+    url('https://c4.wallpaperflare.com/wallpaper/1005/822/563/star-wars-death-star-at-at-space-wallpaper-preview.jpg');
+  background-size: 760px 600px;
   background-position: center;
   background-repeat: no-repeat;
+  border: 5px solid rgb(17, 17, 70);
+  border-radius: 25px;
 }
 
 @keyframes App-logo-spin {

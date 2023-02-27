@@ -17,7 +17,7 @@ const StarwarsAPI = () => {
     }, [API])
 
     return (
-        <div className='bg mt-4 p-4'>
+        <div className='bg mt-4 p-4 col-6 mx-auto'>
             <button className='btn btn-info btn-sm' onClick={()=> setAPI('people')}>People</button> 
             <button className='btn btn-success btn-sm ms-2' onClick={()=> setAPI('starships')}>Starships</button> 
             <button className='btn btn-warning btn-sm ms-2' onClick={()=> setAPI('planets')}>Planets</button>

@@ -19,4 +19,4 @@ Routes(app);
 
 app.listen(PORT, ()=>{
     console.log(`Server is up and running on ${PORT}`)
-} )
+})

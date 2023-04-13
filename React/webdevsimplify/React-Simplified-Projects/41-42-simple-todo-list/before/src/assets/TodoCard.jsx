@@ -1,6 +1,6 @@
 import React from "react";
 
-const TodoCard = ({ name, checked, id , checkTodo, deleteTodo }) => {
+const TodoCard = ({ name, id , checkTodo, deleteTodo }) => {
   return (
     <li className="list-item">
       <label className="list-item-label">
@@ -11,7 +11,7 @@ const TodoCard = ({ name, checked, id , checkTodo, deleteTodo }) => {
         />
         <span data-list-item-text>{name}</span>
       </label>
-      <button data-button-delete onClick={(e) => deleteTodo(id)}>
+      <button data-button-delete onClick={() => deleteTodo(id)}>
         Delete
       </button>
     </li>

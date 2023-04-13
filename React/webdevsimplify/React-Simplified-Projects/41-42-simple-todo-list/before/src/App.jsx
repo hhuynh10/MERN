@@ -1,10 +1,11 @@
 import { useState } from "react";
 import "./App.css";
 import TodoCard from "./assets/TodoCard";
+import { useLocalStorage } from "./useLocalStorage";
 
 function App() {
   const [todoName, setTodoName] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useLocalStorage("key", []);
 
   const addTodo = () => {
     if (todoName.length === 0) return;

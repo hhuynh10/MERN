@@ -4,19 +4,14 @@ import "./App.css";
 function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
+  
+  const [emailError, setEmailError] = useState([]);
+  const [passwordError, setPasswordError] = useState([]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (email.length === 0 || !email.includes("@webdevsimplified.com")) {
-      setError(true);
-    }
-
-    for (let i = 0; i < password.length; i++) {
-      if (password.length < 10 || isNaN(i)) {
-        setError(true);
-      }
-    }
+    
+    
   };
 
   return (

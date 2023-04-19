@@ -1,66 +1,96 @@
-import { useState } from "react"
-import "./styles.css"
-import { TodoItem } from "./TodoItem"
+import { useState, useReducer, useEffect, createContext } from "react";
+import "./styles.css";
+import { TodoItem } from "./TodoItem";
+import NewTodoForm from "./NewTodoForm";
+import TodoList from "./TodoList";
+import TodoFilterForm from "./TodoFilterForm";
+
+const LOCAL_STORAGE_KEY = "TODOS";
+
+export const TodoContext = createContext();
+
+const ACTION = {
+  ADD: "ADD",
+  UPDATE: "UPDATE",
+  DELETE: "DELETE",
+  TOGGLE: "TOGGLE",
+};
+
+function reducer(todos, { type, payload }) {
+  switch (type) {
+    case ACTION.ADD:
+      return [
+        ...todos,
+        { name: payload.name, completed: false, id: crypto.randomUUID() },
+      ];
+
+    case ACTION.TOGGLE:
+      return todos.map((todo) => {
+        if (todo.id === payload.id)
+          return { ...todo, completed: payload.completed };
+
+        return todo;
+      });
+
+    case ACTION.DELETE:
+      return todos.filter((todo) => {
+        return todo.id !== payload.id;
+      });
+
+    default:
+      throw Error(`No action was found for ${type}.`);
+  }
+}
 
 function App() {
-  const [newTodoName, setNewTodoName] = useState("")
-  const [todos, setTodos] = useState([])
+  const [filterName, setFilterName] = useState("");
+  const [completedCheckbox, setCompletedCheckbox] = useState("");
+  const [todos, dispatch] = useReducer(reducer, [], (initialValue) => {
+    const value = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (value == null) return initialValue;
+    return JSON.parse(value);
+  });
 
-  function addNewTodo() {
-    if (newTodoName === "") return
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
+  }, [todos]);
 
-    setTodos(currentTodos => {
-      return [
-        ...currentTodos,
-        { name: newTodoName, completed: false, id: crypto.randomUUID() },
-      ]
-    })
-    setNewTodoName("")
+  const filterTodos = todos.filter((todo) => {
+    if (completedCheckbox && todo.completed) return false
+    return todo.name.includes(filterName);
+  });
+
+  function addNewTodo(name) {
+    dispatch({ type: ACTION.ADD, payload: { name } });
   }
 
   function toggleTodo(todoId, completed) {
-    setTodos(currentTodos => {
-      return currentTodos.map(todo => {
-        if (todo.id === todoId) return { ...todo, completed }
-
-        return todo
-      })
-    })
+    dispatch({
+      type: ACTION.TOGGLE,
+      payload: { id: todoId, completed },
+    });
   }
 
   function deleteTodo(todoId) {
-    setTodos(currentTodos => {
-      return currentTodos.filter(todo => todo.id !== todoId)
-    })
+    dispatch({ type: ACTION.DELETE, payload: { id: todoId } });
   }
 
   return (
-    <>
-      <ul id="list">
-        {todos.map(todo => {
-          return (
-            <TodoItem
-              key={todo.id}
-              {...todo}
-              toggleTodo={toggleTodo}
-              deleteTodo={deleteTodo}
-            />
-          )
-        })}
-      </ul>
+    <TodoContext.Provider
+      value={{ todos: filterTodos, addNewTodo, toggleTodo, deleteTodo }}
+    >
+      <TodoFilterForm
+        name={filterName}
+        setName={setFilterName}
+        completedCheckbox={completedCheckbox}
+        setCompletedCheckbox={setCompletedCheckbox}
+      />
 
-      <div id="new-todo-form">
-        <label htmlFor="todo-input">New Todo</label>
-        <input
-          type="text"
-          id="todo-input"
-          value={newTodoName}
-          onChange={e => setNewTodoName(e.target.value)}
-        />
-        <button onClick={addNewTodo}>Add Todo</button>
-      </div>
-    </>
-  )
+      <TodoList />
+
+      <NewTodoForm />
+    </TodoContext.Provider>
+  );
 }
 
-export default App
+export default App;

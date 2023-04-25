@@ -1,6 +1,5 @@
 import { useState, useReducer, useEffect, createContext } from "react";
 import "./styles.css";
-import { TodoItem } from "./TodoItem";
 import NewTodoForm from "./NewTodoForm";
 import TodoList from "./TodoList";
 import TodoFilterForm from "./TodoFilterForm";
@@ -14,6 +13,7 @@ const ACTION = {
   UPDATE: "UPDATE",
   DELETE: "DELETE",
   TOGGLE: "TOGGLE",
+  UPDATE: "UPDATE",
 };
 
 function reducer(todos, { type, payload }) {
@@ -37,6 +37,14 @@ function reducer(todos, { type, payload }) {
         return todo.id !== payload.id;
       });
 
+    case ACTION.UPDATE:
+      return todos.map((todo) => {
+        if (todo.id === payload.id) {
+          return { ...todo, name: payload.name };
+        }
+        return todo
+      });
+
     default:
       throw Error(`No action was found for ${type}.`);
   }
@@ -56,7 +64,7 @@ function App() {
   }, [todos]);
 
   const filterTodos = todos.filter((todo) => {
-    if (completedCheckbox && todo.completed) return false
+    if (completedCheckbox && todo.completed) return false;
     return todo.name.includes(filterName);
   });
 
@@ -75,9 +83,19 @@ function App() {
     dispatch({ type: ACTION.DELETE, payload: { id: todoId } });
   }
 
+  function updateTodo(name, id) {
+    dispatch({ type: ACTION.UPDATE, payload: { name, id } });
+  }
+
   return (
     <TodoContext.Provider
-      value={{ todos: filterTodos, addNewTodo, toggleTodo, deleteTodo }}
+      value={{
+        todos: filterTodos,
+        addNewTodo,
+        toggleTodo,
+        deleteTodo,
+        updateTodo,
+      }}
     >
       <TodoFilterForm
         name={filterName}

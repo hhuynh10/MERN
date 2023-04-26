@@ -1,19 +1,38 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
-import RootLayout from "./RootLayout";
-import PostsList from "./pages/PostsList";
-import UsersList from "./pages/UsersList";
-import TodosList from "./pages/TodosList";
-import axios from "axios";
+import { postsListRoute } from "./pages/PostsList";
+import { postsUserRoute } from "./pages/UsersList";
+import { todosRoute } from "./pages/TodosList";
+import RootLayout from "./layouts/RootLayout";
+import { postRoute } from "./pages/Post";
+import { userRoute } from "./pages/User";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
     children: [
-        { index: true, element: <Navigate to="/posts" /> },
-      { path: "posts", element: <PostsList /> },
-      { path: "users", element: <UsersList /> },
-      { path: "todos", element: <TodosList /> },
+      {
+        errorElement: <h1>Error - Something Went Wrong</h1>,
+        children: [
+          { index: true, element: <Navigate to="/posts" /> },
+          {
+            path: "posts",
+            children: [
+              { index: true, ...postsListRoute },
+              { path: ":postId", ...postRoute },
+            ],
+          },
+          {
+            path: "users",
+            children: [
+              { index: true, ...postsUserRoute },
+              { path: ":userId", ...userRoute },
+            ],
+          },
+          { path: "todos", ...todosRoute },
+          { path: "*", element: <h1>404 - Page Not Found</h1> },
+        ],
+      },
     ],
   },
 ]);

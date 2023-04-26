@@ -42,7 +42,7 @@ function reducer(todos, { type, payload }) {
         if (todo.id === payload.id) {
           return { ...todo, name: payload.name };
         }
-        return todo
+        return todo;
       });
 
     default:

@@ -22,17 +22,40 @@ const User = () => {
       </div>
 
       <h3 className="mt-4 mb-2">Posts</h3>
-
-      <div className="card">
-        <div className="card-header">{posts.title}</div>
-        <div className="card-body">
-          <div className="card-preview-text">{posts.body}</div>
-        </div>
+      <div className="card-grid">
+        {posts.map((post) => {
+          return (
+            <div className="card">
+              <div className="card-header">
+                {post.title}
+              </div>
+              <div className="card-body">
+                <div className="card-preview-text">
+                  {post.body}
+                </div>
+              </div>
+              <div className="card-footer">
+                <Link className="btn" to={`/posts/${post.id}`}>
+                  View
+                </Link>
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       <h3 className="mt-4 mb-2">Todos</h3>
       <ul>
-        <li>{todos.title}</li>
+        {todos.map((todo) => {
+          return (
+            <li
+              key={todo.id}
+              className={`${todo.completed && "strike-through"}`}
+            >
+              {todo.title}
+            </li>
+          );
+        })}
       </ul>
     </>
   );
@@ -40,11 +63,11 @@ const User = () => {
 
 async function loader({ request: { signal }, params }) {
   const posts = axios
-    .get(`http://127.0.0.1:3000/posts/${params.userId}`, { signal })
+    .get(`http://127.0.0.1:3000/posts?userId=${params.userId}`, { signal })
     .then((res) => res.data);
 
   const todos = axios
-    .get(`http://127.0.0.1:3000/todos/${params.userId}`, { signal })
+    .get(`http://127.0.0.1:3000/todos?userId=${params.userId}`, { signal })
     .then((res) => res.data);
 
   const user = axios

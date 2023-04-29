@@ -5,6 +5,7 @@ import { todosRoute } from "./pages/TodosList";
 import RootLayout from "./layouts/RootLayout";
 import { postRoute } from "./pages/Post";
 import { userRoute } from "./pages/User";
+import { newPostRoute } from "./pages/NewPost";
 
 export const router = createBrowserRouter([
   {
@@ -12,7 +13,7 @@ export const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
-        errorElement: <h1>Error - Something Went Wrong</h1>,
+        // errorElement: <h1>Error - Something Went Wrong</h1>,
         children: [
           { index: true, element: <Navigate to="/posts" /> },
           {
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
             children: [
               { index: true, ...postsListRoute },
               { path: ":postId", ...postRoute },
+              { path: "new", ...newPostRoute },
             ],
           },
           {

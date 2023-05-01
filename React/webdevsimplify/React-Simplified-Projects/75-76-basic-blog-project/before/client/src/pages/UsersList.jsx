@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Link, useLoaderData } from "react-router-dom";
+import { getUsers } from "../api/user";
 
 const UsersList = () => {
   const users = useLoaderData();
@@ -31,9 +32,7 @@ const UsersList = () => {
 };
 
 const loader = ({ request: { signal } }) => {
-  return axios
-    .get("http://127.0.0.1:3000/users", { signal })
-    .then((res) => res.data);
+  return getUsers({ signal });
 };
 
 export const postsUserRoute = {

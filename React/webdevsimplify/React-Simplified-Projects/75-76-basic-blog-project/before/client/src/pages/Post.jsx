@@ -1,6 +1,9 @@
 import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import axios from "axios";
+import { getPost } from "../api/posts";
+import { getUser } from "../api/user";
+import { getComments } from "../api/comments";
 
 const Post = () => {
   const { post, comments, user } = useLoaderData();
@@ -31,18 +34,12 @@ const Post = () => {
   );
 };
 
-async function loader({ request: { signal }, params }) {
-  const post = await axios
-    .get(`http://127.0.0.1:3000/posts/${params.postId}`, { signal })
-    .then((res) => res.data);
+async function loader({ request: { signal }, params: { postId } }) {
+  const post = await getPost(postId, { signal });
 
-  const comments = axios
-    .get(`http://127.0.0.1:3000/posts/${params.postId}/comments`, { signal })
-    .then((res) => res.data);
+  const comments = getComments(postId, { signal });
 
-  const user = axios
-    .get(`http://127.0.0.1:3000/users/${post.userId}`, { signal })
-    .then((res) => res.data);
+  const user = getUser(post.userId, { signal });
 
   return { post, comments: await comments, user: await user };
 }

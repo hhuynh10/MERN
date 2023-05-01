@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useLoaderData } from "react-router-dom";
+import { getTodos } from "../api/todos";
 
 const TodosList = () => {
   const todos = useLoaderData();
@@ -24,9 +25,7 @@ const TodosList = () => {
 };
 
 const loader = ({ request: { signal } }) => {
-  return axios
-    .get("http://127.0.0.1:3000/todos", { signal })
-    .then((res) => res.data);
+  return getTodos({ signal });
 };
 
 export const todosRoute = {

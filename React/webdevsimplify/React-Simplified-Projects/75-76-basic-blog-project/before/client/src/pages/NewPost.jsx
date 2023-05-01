@@ -1,6 +1,7 @@
 import React from "react";
-import { Form, useLoaderData } from "react-router-dom";
-import axios from "axios";
+import { Form, redirect, useLoaderData } from "react-router-dom";
+import { getUsers } from "../api/user";
+import { createPost } from "../api/posts";
 
 const NewPost = () => {
   const users = useLoaderData();
@@ -11,19 +12,18 @@ const NewPost = () => {
     <>
       <Form method="post" className="form">
         <div className="form-row">
-          <div className="form-group error">
+          <div className="form-group">
             <label htmlFor="title">Title</label>
             <input type="text" name="title" id="title" />
-            <div className="error-message">Required</div>
           </div>
           <div className="form-group">
             <label htmlFor="userId">Author</label>
             <select name="userId" id="userId">
-              {
-                users.map(user => (
-                    <option key={user.id} value={user.id}>{user.name}</option>
-                ))
-              }
+              {users.map((user) => (
+                <option key={user.id} value={user.id}>
+                  {user.name}
+                </option>
+              ))}
             </select>
           </div>
         </div>
@@ -44,13 +44,32 @@ const NewPost = () => {
   );
 };
 
+async function action({ request }) {
+  const formData = await request.formData();
+  const title = formData.get("title");
+  const body = formData.get("body");
+  const userId = formData.get("userId");
+
+  // const errors = postFormValidator({ title, userId, body });
+
+  // if (Object.keys(errors).length > 0) {
+  //   return errors;
+  // }
+
+  const post = await createPost(
+    { title, body, userId },
+    { signal: request.signal }
+  );
+
+  return redirect(`/posts/${post.id}`);
+}
+
 const loader = ({ request: { signal } }) => {
-  return axios
-    .get("http://127.0.0.1:3000/users", { signal })
-    .then((res) => res.data);
+  return getUsers({ signal });
 };
 
 export const newPostRoute = {
   loader,
+  action,
   element: <NewPost />,
 };

@@ -1,6 +1,9 @@
 import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import axios from "axios";
+import { getUser } from "../api/user";
+import { getPosts } from "../api/posts";
+import { getTodos } from "../api/todos";
 
 const User = () => {
   const { user, todos, posts } = useLoaderData();
@@ -26,13 +29,9 @@ const User = () => {
         {posts.map((post) => {
           return (
             <div className="card">
-              <div className="card-header">
-                {post.title}
-              </div>
+              <div className="card-header">{post.title}</div>
               <div className="card-body">
-                <div className="card-preview-text">
-                  {post.body}
-                </div>
+                <div className="card-preview-text">{post.body}</div>
               </div>
               <div className="card-footer">
                 <Link className="btn" to={`/posts/${post.id}`}>
@@ -61,18 +60,12 @@ const User = () => {
   );
 };
 
-async function loader({ request: { signal }, params }) {
-  const posts = axios
-    .get(`http://127.0.0.1:3000/posts?userId=${params.userId}`, { signal })
-    .then((res) => res.data);
+async function loader({ request: { signal }, params: { userId } }) {
+  const posts = getPosts({ signal, params: { userId } });
 
-  const todos = axios
-    .get(`http://127.0.0.1:3000/todos?userId=${params.userId}`, { signal })
-    .then((res) => res.data);
+  const todos = getTodos({ signal, params: { userId } });
 
-  const user = axios
-    .get(`http://127.0.0.1:3000/users/${params.userId}`, { signal })
-    .then((res) => res.data);
+  const user = getUser(userId, { signal });
 
   return { user: await user, todos: await todos, posts: await posts };
 }
